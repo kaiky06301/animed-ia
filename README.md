@@ -254,4 +254,6 @@ Esta entrega **define e documenta** o componente. A implementação completa é 
 
 ## 🎬 Vídeo pitch
 
-> _(link a inserir)_
+**https://youtu.be/7jQUGx2zBrk**
+
+Apresenta o problema de negócio, a justificativa técnica da abordagem híbrida, os dados utilizados, a arquitetura de integração e o resultado sobre a base real.
