@@ -4,37 +4,37 @@ FILA DE CUIDADO PREVENTIVO
 ==============================================================================
  !  1. Mia          score  45  atenção
       tutor: Marina Oliveira Silva
-      por quê: 1 vacina em atraso (+25); nunca passou por atendimento na clínica (+20); atraso vacinal de 491 dias (+15); retorno já marcado pela clínica (-15)
+      por quê: 1 vacina em atraso (+25); nunca passou por atendimento na clínica (+20); atraso vacinal de 491 dias (+15); consulta já agendada (-15)
       ação: Convocar para atualização da carteira de vacinação
 
  !  2. Thor         score  40  atenção
       tutor: Tutor Demonstração
-      por quê: 2 vacinas em atraso (+25); 2 falta(s) em 12 meses (+20); 4 cancelamento(s) em 12 meses (+10); retorno já marcado pela clínica (-15)
+      por quê: 2 vacinas em atraso (+25); 2 falta(s) em 12 meses (+20); 4 cancelamento(s) em 12 meses (+10); consulta já agendada (-15)
       ação: Convocar para atualização da carteira de vacinação
 
     3. Thor         score  25  estável
       tutor: Marina Oliveira Silva
-      por quê: 2 vacinas em atraso (+25); atraso vacinal de 547 dias (+15); retorno já marcado pela clínica (-15)
+      por quê: 2 vacinas em atraso (+25); atraso vacinal de 547 dias (+15); consulta já agendada (-15)
       ação: Convocar para atualização da carteira de vacinação
 
-    4. Bidu         score  20  estável
-      tutor: Juliana Santos
-      por quê: nunca passou por atendimento na clínica (+20)
+    4. Nina         score  15  estável
+      tutor: Carlos Mendes
+      por quê: nunca passou por atendimento na clínica (+20); 1 falta(s) em 12 meses (+10); consulta já agendada (-15)
       ação: Manter no ciclo normal de lembretes
 
-    5. Nina         score  15  estável
-      tutor: Carlos Mendes
-      por quê: nunca passou por atendimento na clínica (+20); 1 falta(s) em 12 meses (+10); retorno já marcado pela clínica (-15)
+    5. Bidu         score   5  estável
+      tutor: Juliana Santos
+      por quê: nunca passou por atendimento na clínica (+20); consulta já agendada (-15)
       ação: Manter no ciclo normal de lembretes
 
     6. Luna         score   0  estável
       tutor: Juliana Santos
-      por quê: retorno já marcado pela clínica (-15)
+      por quê: Nenhum sinal de afastamento
       ação: Manter no ciclo normal de lembretes
 
     7. Mel          score   0  estável
       tutor: Tutor Demonstração
-      por quê: retorno já marcado pela clínica (-15)
+      por quê: Nenhum sinal de afastamento
       ação: Manter no ciclo normal de lembretes
 
     8. Rex          score   0  estável

@@ -76,7 +76,7 @@ PESO_SEM_PESAGEM = 5
 TETO_FALTAS = 20
 TETO_CANCELAMENTOS = 10
 
-ABATIMENTO_RETORNO_MARCADO = 15
+ABATIMENTO_CONSULTA_AGENDADA = 15
 
 LIMITE_ATENCAO = 30
 LIMITE_CRITICO = 60
@@ -157,15 +157,18 @@ def avaliar(sinais: Sinais) -> Avaliacao:
 
     score = min(sum(m.peso for m in motivos), 100)
 
-    # Retorno marcado significa que a clínica já agiu: o caso está endereçado
+    # Consulta marcada significa que a clínica já agiu: o caso está endereçado
     # e não deve competir por atenção com quem ninguém procurou ainda. O
     # abatimento entra na lista de motivos para que a conta feche na tela —
     # score que não bate com a explicação destrói a confiança no número.
-    if sinais.tem_retorno_marcado:
-        score = max(score - ABATIMENTO_RETORNO_MARCADO, 0)
+    # Só abate o que existe. Sem sinal de afastamento o score já é zero, e
+    # listar um desconto como única explicação de um paciente saudável
+    # confundiria quem lê a fila.
+    if sinais.tem_consulta_agendada and score > 0:
+        score = max(score - ABATIMENTO_CONSULTA_AGENDADA, 0)
         motivos.append(Motivo(
-            -ABATIMENTO_RETORNO_MARCADO,
-            "retorno já marcado pela clínica",
+            -ABATIMENTO_CONSULTA_AGENDADA,
+            "consulta já agendada",
         ))
 
     faixa = (Faixa.CRITICO if score >= LIMITE_CRITICO

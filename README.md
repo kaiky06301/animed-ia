@@ -100,7 +100,7 @@ Todos os sinais saem de tabelas que **já existem** no banco. Nenhum dado novo p
 | Taxa de doses no horário | `TB_DOSE_MEDICAMENTO` | Mede adesão real ao tratamento prescrito |
 | Tratamentos com doses perdidas seguidas | `TB_MEDICAMENTO` + `TB_DOSE_MEDICAMENTO` | Indica abandono de tratamento em curso |
 | Dias desde a última pesagem | `TB_PET.DATA_ULTIMA_PESAGEM` | Sinal mais fraco, porém o mais precoce |
-| Retorno já marcado | `TB_CONSULTA` (motivo com "Retorno") | **Abate** o score: a clínica já agiu |
+| Consulta agendada para o futuro | `TB_CONSULTA` (status `AGENDADA`) | **Abate** o score: a clínica já agiu |
 | Perfil do pet | `TB_PET` | Espécie e idade modulam o calendário vacinal esperado |
 
 ### Estrutura e utilização
@@ -189,20 +189,19 @@ FILA DE CUIDADO PREVENTIVO
       tutor: Marina Oliveira Silva
       por quê: 1 vacina em atraso (+25); nunca passou por atendimento
                na clínica (+20); atraso vacinal de 491 dias (+15);
-               retorno já marcado pela clínica (-15)
+               consulta já agendada (-15)
       ação: Convocar para atualização da carteira de vacinação
 
  !  2. Thor         score  40  atenção
       tutor: Tutor Demonstração
       por quê: 2 vacinas em atraso (+25); 2 falta(s) em 12 meses (+20);
-               4 cancelamento(s) em 12 meses (+10);
-               retorno já marcado pela clínica (-15)
+               4 cancelamento(s) em 12 meses (+10); consulta já agendada (-15)
       ação: Convocar para atualização da carteira de vacinação
 
     3. Thor         score  25  estável
       tutor: Marina Oliveira Silva
       por quê: 2 vacinas em atraso (+25); atraso vacinal de 547 dias (+15);
-               retorno já marcado pela clínica (-15)
+               consulta já agendada (-15)
       ação: Convocar para atualização da carteira de vacinação
 ==============================================================================
 9 pacientes analisados: 0 em risco crítico, 2 em atenção, 7 estáveis
@@ -213,9 +212,11 @@ A saída completa está em [`resultados/execucao-13-09-2026.txt`](resultados/exe
 ### O que esse resultado mostra
 
 - **A Mia lidera** pelo acúmulo, não por um motivo só: vacina vencida há 491 dias **e** nenhum atendimento registrado. É o perfil que some sem ninguém notar.
-- **O Thor da conta de demonstração é o segundo** por desengajamento ativo: além das vacinas, ele acumula 2 faltas e 4 cancelamentos em 12 meses. Não é esquecimento, é afastamento.
-- **O outro Thor cai para terceiro** mesmo com *duas* vacinas atrasadas, porque a clínica **já marcou retorno**. O caso está endereçado e não disputa atenção com quem ninguém procurou.
+- **O Thor da conta de demonstração é o segundo** por desengajamento ativo: além das vacinas, acumula 2 faltas e 4 cancelamentos em 12 meses. Não é esquecimento, é afastamento.
+- **O outro Thor cai para terceiro** mesmo com *duas* vacinas atrasadas, porque já existe consulta agendada. O caso está endereçado e não disputa atenção com quem ninguém procurou.
 - **Sete estão estáveis** e não precisam de contato. Numa base grande é isso que torna a fila utilizável: ela diz onde *não* gastar esforço.
+
+O abatimento só conta consulta marcada **para frente**. Agendamento vencido que continua em aberto não é cuidado endereçado — é consulta que ninguém resolveu, e descontar por ela esconderia justamente o paciente esquecido.
 
 ---
 

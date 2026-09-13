@@ -41,7 +41,7 @@ class Sinais:
     taxa_de_doses_no_horario: float | None
     tratamentos_abandonados: int
     dias_desde_ultima_pesagem: int | None
-    tem_retorno_marcado: bool
+    tem_consulta_agendada: bool
 
     def como_dicionario(self) -> dict:
         return self.__dict__.copy()
@@ -116,8 +116,12 @@ def extrair(pet: dict, consultas: Iterable[dict], vacinas: Iterable[dict],
         taxa_de_doses_no_horario=taxa,
         tratamentos_abandonados=abandonados,
         dias_desde_ultima_pesagem=_dias_ate_hoje(pesagem, hoje),
-        tem_retorno_marcado=any(
-            c.get("status") == "AGENDADA" and "etorno" in (c.get("motivo") or "")
+        # A clínica já agiu quando existe consulta marcada *para frente*.
+        # Agendamento no passado que continua "AGENDADA" não é cuidado
+        # endereçado: é consulta que ninguém resolveu, e abater o score
+        # por causa dela esconderia justamente o paciente esquecido.
+        tem_consulta_agendada=any(
+            c.get("status") == "AGENDADA" and (_data(c.get("dataHora")) or hoje) >= hoje
             for c in consultas
         ),
     )
